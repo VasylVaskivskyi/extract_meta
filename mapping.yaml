@@ -1,0 +1,23 @@
+#Put space after each colon
+#Order must be preserved
+
+#Replace Fluor attribute of Channel
+fluor_name: 
+    - DAPI: DAPI
+    - EGFP: FITC
+    - DsRed: Cy3
+    - Cy5: Cy5
+
+#Replace Name attribute of Channel
+channel_name: 
+    - DAPI: Hoechst (nuclei)
+    - FITC: Laminin (basement membrane)
+    - Cy3: Synaptopodin (glomerular)
+    - Cy5: THP (thick limb)
+               
+
+#Replace SizeX and SizeY attributes of Pixels
+size: 
+    - SizeX: 52660
+    - SizeY: 36040  
+       

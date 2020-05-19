@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><OME xmlns="http://www.openmicroscopy.org/Schemas/OME/2016-06" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openmicroscopy.org/Schemas/OME/2016-06 http://www.openmicroscopy.org/Schemas/OME/2016-06/ome.xsd">
+<Experimenter ID="Experimenter:0" UserName="pattenh1"/>
+<Instrument ID="Instrument:0">
+<Microscope Type="Upright"/>
+<Detector ID="Detector:ORCAFlash" Model="HDCamC11440-22C"/>
+<Objective ID="Objective:1" Immersion="Air" LensNA="0.45" Model="Plan-Apochromat 10x/0.45 M27" NominalMagnification="10.0" WorkingDistance="2100.0" WorkingDistanceUnit="µm"/>
+<FilterSet ID="FilterSet:1">
+<ExcitationFilterRef ID="Filter:1"/>
+<DichroicRef ID="Dichroic:1"/>
+<EmissionFilterRef ID="Filter:2"/>
+</FilterSet>
+<FilterSet ID="FilterSet:2">
+<ExcitationFilterRef ID="Filter:3"/>
+<DichroicRef ID="Dichroic:2"/>
+<EmissionFilterRef ID="Filter:4"/>
+</FilterSet>
+<FilterSet ID="FilterSet:3">
+<ExcitationFilterRef ID="Filter:5"/>
+<DichroicRef ID="Dichroic:3"/>
+<EmissionFilterRef ID="Filter:6"/>
+</FilterSet>
+<FilterSet ID="FilterSet:4">
+<ExcitationFilterRef ID="Filter:7"/>
+<DichroicRef ID="Dichroic:4"/>
+<EmissionFilterRef ID="Filter:8"/>
+</FilterSet>
+<Filter ID="Filter:1">
+<TransmittanceRange CutIn="335.0" CutInUnit="nm" CutOut="383.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:2">
+<TransmittanceRange CutIn="420.0" CutInUnit="nm" CutOut="470.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:3">
+<TransmittanceRange CutIn="450.0" CutInUnit="nm" CutOut="490.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:4">
+<TransmittanceRange CutIn="500.0" CutInUnit="nm" CutOut="550.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:5">
+<TransmittanceRange CutIn="538.0" CutInUnit="nm" CutOut="562.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:6">
+<TransmittanceRange CutIn="570.0" CutInUnit="nm" CutOut="640.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:7">
+<TransmittanceRange CutIn="625.0" CutInUnit="nm" CutOut="655.0" CutOutUnit="nm"/>
+</Filter>
+<Filter ID="Filter:8">
+<TransmittanceRange CutIn="665.0" CutInUnit="nm" CutOut="715.0" CutOutUnit="nm"/>
+</Filter>
+<Dichroic ID="Dichroic:1"/>
+<Dichroic ID="Dichroic:2"/>
+<Dichroic ID="Dichroic:3"/>
+<Dichroic ID="Dichroic:4"/>
+</Instrument>
+<Image ID="Image:0" Name="VAN0001-RK-1-24-MxIF_raw.czi #1">
+<AcquisitionDate>2019-08-22T16:25:54.090</AcquisitionDate>
+<ExperimenterRef ID="Experimenter:0"/>
+<InstrumentRef ID="Instrument:0"/>
+<ObjectiveSettings ID="Objective:1" Medium="Air" RefractiveIndex="1.000293"/>
+<StageLabel Name="Scene position #0" X="-33945.6" XUnit="µm" Y="11403.599999999999" YUnit="µm" Z="2295.609" ZUnit="µm"/>
+<Pixels BigEndian="false" DimensionOrder="XYCZT" ID="Pixels:0" Interleaved="false" PhysicalSizeX="0.65" PhysicalSizeXUnit="µm" PhysicalSizeY="0.65" PhysicalSizeYUnit="µm" SignificantBits="16" SizeC="4" SizeT="1" SizeX="52660" SizeY="36040" SizeZ="1" Type="uint16">
+<Channel AcquisitionMode="WideField" Color="65535" EmissionWavelength="465.0" EmissionWavelengthUnit="nm" ExcitationWavelength="353.0" ExcitationWavelengthUnit="nm" Fluor="DAPI" ID="Channel:0:0" IlluminationType="Other" Name="Hoechst (nuclei)" SamplesPerPixel="1">
+<DetectorSettings Binning="1x1" Gain="0.0" ID="Detector:ORCAFlash"/>
+<FilterSetRef ID="FilterSet:1"/>
+<LightPath/>
+</Channel>
+<Channel AcquisitionMode="WideField" Color="16711935" EmissionWavelength="509.0" EmissionWavelengthUnit="nm" ExcitationWavelength="488.0" ExcitationWavelengthUnit="nm" Fluor="FITC" ID="Channel:0:1" IlluminationType="Other" Name="Laminin (basement membrane)" SamplesPerPixel="1">
+<DetectorSettings Binning="1x1" Gain="0.0" ID="Detector:ORCAFlash"/>
+<FilterSetRef ID="FilterSet:2"/>
+<LightPath/>
+</Channel>
+<Channel AcquisitionMode="WideField" Color="-16776961" EmissionWavelength="572.0" EmissionWavelengthUnit="nm" ExcitationWavelength="545.0" ExcitationWavelengthUnit="nm" Fluor="Cy3" ID="Channel:0:2" IlluminationType="Other" Name="Synaptopodin (glomerular)" SamplesPerPixel="1">
+<DetectorSettings Binning="1x1" Gain="0.0" ID="Detector:ORCAFlash"/>
+<FilterSetRef ID="FilterSet:3"/>
+<LightPath/>
+</Channel>
+<Channel AcquisitionMode="WideField" Color="-16711681" EmissionWavelength="673.0" EmissionWavelengthUnit="nm" ExcitationWavelength="650.0" ExcitationWavelengthUnit="nm" Fluor="Cy5" ID="Channel:0:3" IlluminationType="Other" Name="THP (thick limb)" SamplesPerPixel="1">
+<DetectorSettings Binning="1x1" Gain="0.0" ID="Detector:ORCAFlash"/>
+<FilterSetRef ID="FilterSet:4"/>
+<LightPath/>
+</Channel>
+<MetadataOnly/>
+<Plane DeltaT="2.5989999771118164" DeltaTUnit="s" ExposureTime="20.0" ExposureTimeUnit="s" PositionX="-33945.6" PositionXUnit="µm" PositionY="11403.599999999999" PositionYUnit="µm" PositionZ="2295.609" PositionZUnit="µm" TheC="0" TheT="0" TheZ="0"/>
+<Plane DeltaT="3.2810001373291016" DeltaTUnit="s" ExposureTime="320.10366922561" ExposureTimeUnit="s" PositionX="-33945.6" PositionXUnit="µm" PositionY="11403.599999999999" PositionYUnit="µm" PositionZ="2295.609" PositionZUnit="µm" TheC="1" TheT="0" TheZ="0"/>
+<Plane DeltaT="4.101999998092651" DeltaTUnit="s" ExposureTime="88.903669225611" ExposureTimeUnit="s" PositionX="-33945.6" PositionXUnit="µm" PositionY="11403.599999999999" PositionYUnit="µm" PositionZ="2295.609" PositionZUnit="µm" TheC="2" TheT="0" TheZ="0"/>
+<Plane DeltaT="4.868000030517578" DeltaTUnit="s" ExposureTime="250.0" ExposureTimeUnit="s" PositionX="-33945.6" PositionXUnit="µm" PositionY="11403.599999999999" PositionYUnit="µm" PositionZ="2295.609" PositionZUnit="µm" TheC="3" TheT="0" TheZ="0"/>
+</Pixels>
+</Image>
+</OME>
