@@ -21,11 +21,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import org.yaml.snakeyaml.Yaml;
 
 import loci.common.services.DependencyException;
@@ -43,7 +38,7 @@ import loci.formats.tools.ImageConverter;
 
 class ExtractMeta
 {
-    public static void main(String[] args) throws IOException, JSONException, FormatException
+    public static void main(String[] args) throws IOException, FormatException
     {
         if (args.length == 0)
         {
@@ -70,7 +65,7 @@ class ExtractMeta
         {
             for (String arg : args)
             {
-                if (arg.endsWith("yaml") || arg.endsWith("json")){ mappingPath = arg; }
+                if (arg.endsWith("yaml") || arg.endsWith("yml")){ mappingPath = arg; }
                 if (arg.equals("--nochanges")){ noChanges = true; }
             }
         }
@@ -107,18 +102,10 @@ class ExtractMeta
 
 
         String strXML = "";
-        HashMap<String, HashMap<String, String>> mappings = new HashMap<String, HashMap<String, String>>();
+        HashMap<String, HashMap<String, String>> mappings = new HashMap<>();
         if (mappingPath != null)
         {
-            if (mappingPath.endsWith(".json"))
-            {
-                mappings = readJSONToMap(mappingPath);
-            }
-            else
-            {
-                mappings = readYAMLToMap(mappingPath);
-            }
-
+            mappings = readYAMLToMap(mappingPath);
         }
 
         org.w3c.dom.Document xml = convertStringToXMLDocument(metadata);
@@ -191,6 +178,11 @@ class ExtractMeta
                 HashMap<String, String> sizeMap = mappings.get("size");
                 replaceSize(xml, sizeMap);
             }
+            if (mappings.containsKey("physical_size"))
+            {
+                HashMap<String, String> physicalSizeMap = mappings.get("physical_size");
+                replaceSize(xml, physicalSizeMap);
+            }
         }
     }
 
@@ -245,16 +237,10 @@ class ExtractMeta
             Set<String> keySet = map.keySet();
             for (String name : keySet)
             {
-                int size = Integer.parseInt(map.get(name));
-
-                for (int i = 0; i < images.getLength(); i++)
-                {
-                    Element image = (Element) images.item(i);
-                    Element pixels = (Element) image.getElementsByTagName("Pixels").item(0);
-
-                    if (i == 0){ pixels.setAttribute(name, String.valueOf(size)); }
-                    else { pixels.setAttribute(name, String.valueOf(size / (2 * i))); }
-                }
+                String size = map.get(name);
+                Element image = (Element) images.item(0);
+                Element pixels = (Element) image.getElementsByTagName("Pixels").item(0);
+                pixels.setAttribute(name, size);
             }
         }
     }
@@ -278,14 +264,12 @@ class ExtractMeta
         StringBuilder sb = new StringBuilder();
         try ( BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8)) )
         {
-
             while ( true )
             {
                 String sCurrentLine = br.readLine();
                 if ( sCurrentLine != null ){ sb.append(sCurrentLine); }
                 else { break; }
             }
-
         }
         catch(IOException e){ e.printStackTrace(); }
 
@@ -293,7 +277,7 @@ class ExtractMeta
     }
 
 
-    private static Document convertStringToXMLDocument(String xmlString)
+    public static Document convertStringToXMLDocument(String xmlString)
     {
         //Parser that produces DOM object trees from XML content
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -314,68 +298,15 @@ class ExtractMeta
     }
 
 
-    public static HashMap<String,HashMap<String,String>> readJSONToMap(String path) throws IOException, JSONException
-    {
-        FileReader reader = new FileReader(path);
-        JSONTokener tokener = new JSONTokener(reader);
-        JSONObject json = new JSONObject(tokener);
-        HashMap<String,String> fluorMap = new HashMap<>();
-        HashMap<String, String> channelMap = new HashMap<>();
-        HashMap<String,String> sizeMap = new HashMap<>();
-
-        try
-        {
-            JSONArray fluorArr = json.getJSONArray("fluor_name");
-            fluorMap = convertToMap(fluorArr);
-        }
-        catch(JSONException e){System.out.println("Fluor mapping not specified, skipping...");}
-
-        try
-        {
-            JSONArray channelArr = json.getJSONArray("channel_name");
-            channelMap = convertToMap(channelArr);
-        }
-        catch(JSONException e) {System.out.println("Channel name mapping not specified, skipping...");}
-
-        try
-        {
-            JSONArray sizeArray = json.getJSONArray("size");
-            sizeMap = convertToMap(sizeArray);
-        }
-        catch(JSONException e){System.out.println("Size mapping not specified, skipping...");}
-
-        HashMap<String, HashMap<String,String>> result = new HashMap<>();
-        result.put("fluor_name", fluorMap);
-        result.put("channel_name", channelMap);
-        result.put("size", sizeMap);
-        return result;
-    }
-
-
-    public static HashMap<String,String> convertToMap(JSONArray jsonArr) throws JSONException
-    {
-        HashMap<String, String> map = new HashMap<>();
-        for (int i=0; i < jsonArr.length(); i++)
-        {
-            String key = jsonArr.getJSONObject(i).names().getString(0);
-            String val = jsonArr.getJSONObject(i).getString(key);
-            map.put(key, val);
-        }
-        return map;
-    }
-
     public static  HashMap<String, HashMap<String, String>> readYAMLToMap(String path) throws IOException
     {
         Yaml yaml = new Yaml();
-
 
         //String yamlAsString = readToString(path);
         InputStream inputStream = new FileInputStream(new File(path));
         HashMap<String, ArrayList<HashMap<String,Object>>> yamlData = yaml.load(inputStream);
         Set<String> keySet = yamlData.keySet();
         HashMap<String, HashMap<String, String>> mappedYAML = new HashMap<>();
-
-
 
         for (String key : keySet)
         {
@@ -429,7 +360,7 @@ class ExtractMeta
     }
 
 
-    private static void overwriteComment(String file, String comment) throws IOException, DependencyException
+    public static void overwriteComment(String file, String comment) throws IOException, DependencyException
     {
         RandomAccessInputStream in = null;
         RandomAccessOutputStream out = null;

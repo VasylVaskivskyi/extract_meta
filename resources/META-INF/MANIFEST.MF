@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: com.extmet.ExtractMeta
-Class-Path: libs/bioformats_package.jar libs/json-20190722.jar libs/snakeyaml-1.26.jar
+Class-Path: libs/bioformats_package.jar libs/snakeyaml-1.26.jar
+Implementation-Version: 1.0.1

@@ -6,7 +6,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="extract_meta" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/json-20190722.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/snakeyaml-1.26.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/bioformats_package.jar" path-in-jar="/" />
     </root>
